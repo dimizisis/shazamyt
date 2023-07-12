@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>ShazamYT</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>ShazamYT</h1>
+    <div class="input-box">
+      <input type="text" id="linkInput" placeholder="Enter a link...">
+    </div>
+    <button id="goButton" class="submit-button">Go!</button>
+
+    <div id="outerPlayerDiv" style="visibility: hidden;">
+        <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="bTqVqk7FSmY"></div>
+        <button id="selectButton">Select Time Span</button>
+    </div>
+
+  </div>
+
+  <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css">
+  <script src="https://cdn.plyr.io/3.6.8/plyr.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
