@@ -3,6 +3,9 @@ const player = new Plyr('#player');
 
 const goButton = document.getElementById('goButton');
 
+const SERVER = 'localhost';
+const PORT = '8000';
+
 goButton.addEventListener('click', () => {
   const id = extractVideoId(document.getElementById('linkInput').value);
 
@@ -60,17 +63,22 @@ function secondsToHMS(seconds) {
 
 function displayYouTubeImage(youtubeUrl, startTime) {
 
-  const apiUrl = `http://localhost:8000/youtube?url=${encodeURIComponent(youtubeUrl)}&start=${encodeURIComponent(startTime)}`;
+  const apiUrl = `http://${SERVER}:${PORT}/youtube?url=${encodeURIComponent(youtubeUrl)}&start=${encodeURIComponent(startTime)}`;
 
   fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
-          // const parsedData = JSON.parse(data);
-          console.log(data);
           const albumImage = document.getElementById('albumImage');
-          albumImage.style.visibility = 'visible';
-          albumImage.src = data.track.images.coverart;
-          console.log(document.getElementById('albumImage').src);
+          const songName = document.getElementById('songName');
+          const artist = document.getElementById('artist');
+          songName.innerHTML = data.track.title;
+          artist.innerHTML = data.track.subtitle;
+          if (data.track.images && data.track.images.coverart) {
+            albumImage.src = data.track.images.coverart;
+          } else {
+            albumImage.src = 'https://www.shazam.com/resources/f6f457227917dcdfc9538fbbb5a931f111648b3d/nocoverart.jpg'
+          }
+          albumImage.classList.add('visible');
       })
       .catch(error => console.error('Error:', error));
 }

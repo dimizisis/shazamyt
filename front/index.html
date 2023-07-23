@@ -12,15 +12,18 @@
     <div class="input-box">
       <input type="text" id="linkInput" placeholder="Enter a link...">
     </div>
-    <button id="goButton" class="submit-button">Go!</button>
+    <button id="goButton" class="submit-button">Find Youtube Video</button>
 
     <div id="outerPlayerDiv" style="visibility: hidden;">
         <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="bTqVqk7FSmY"></div>
-        <button id="selectButton">Select Time Span</button>
+        <button id="selectButton" class="submit-button">Go!</button>
     </div>
 
-    <img id="albumImage">
-
+    <div id="resultsDiv" class="container">
+      <img id="albumImage">
+      <h1 id="songName"></h1>
+      <h2 id="artist"></h2>
+    </div>
   </div>
 
   <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css">

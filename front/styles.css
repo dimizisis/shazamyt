@@ -16,6 +16,7 @@ header {
 h1 {
   font-size: 4rem;
   color: white;
+  position: sticky;
 }
 
 .container {
@@ -40,12 +41,8 @@ h1 {
   margin: 1rem;
 }
 
-#selectButton {
-  margin: 1rem;
-}
-
 .submit-button {
-  background: linear-gradient(to right, #ff6347, #1e90ff);
+  background: linear-gradient(135deg, #1a1a1a, #404040);
   color: white;
   border: none;
   padding: 1rem 2rem;
@@ -54,12 +51,22 @@ h1 {
   display: inline-block;
   font-size: 1.6rem;
   cursor: pointer;
+  margin: 1rem;
+}
+
+img {
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+img.visible {
+  opacity: 1;
 }
 
 /* Responsive styles */
 @media screen and (max-width: 600px) {
   h1 {
-    font-size: 6rem;
+    font-size: 3rem;
   }
 
   .input-box input {

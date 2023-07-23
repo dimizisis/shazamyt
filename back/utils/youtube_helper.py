@@ -1,9 +1,10 @@
 
+import os
 import yt_dlp
 from fastapi import HTTPException
 from datetime import datetime
 
-DOWNLOAD_PATH = ''
+DOWNLOAD_PATH = os.getenv('DOWNLOAD_PATH', '/home')
 
 def download_youtube_video_as_mp3(url: str, start: str):
     timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
