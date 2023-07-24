@@ -3,7 +3,7 @@
 
 <head>
   <title>ShazamYT</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
@@ -12,11 +12,15 @@
     <div class="input-box">
       <input type="text" id="linkInput" placeholder="Enter a link...">
     </div>
-    <button id="goButton" class="submit-button">Find Youtube Video</button>
+    <button id="findButton" class="submit-button">Find Youtube Video</button>
 
     <div id="outerPlayerDiv" style="visibility: hidden;">
         <div id="player" data-plyr-provider="youtube" data-plyr-embed-id="bTqVqk7FSmY"></div>
-        <button id="selectButton" class="submit-button">Go!</button>
+        <button id="goButton" class="submit-button">Go!</button>
+    </div>
+
+    <div id="loadingSpinnerDiv" class="container" style="display: none;">
+      <img id="loadingSpinner" src="static/spinner.gif">
     </div>
 
     <div id="resultsDiv" class="container">
@@ -28,7 +32,7 @@
 
   <link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css">
   <script src="https://cdn.plyr.io/3.6.8/plyr.js"></script>
-  <script src="script.js"></script>
+  <script src="js/script.js"></script>
 </body>
 
 </html>

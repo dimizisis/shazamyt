@@ -1,0 +1,114 @@
+body {
+  background: linear-gradient(to right, #232323, #4a148c, #1a237e);
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+h1 {
+  font-size: 4rem;
+  color: white;
+  position: sticky;
+  z-index: 1;
+}
+
+h2 {
+  font-size: 2rem;
+  color: white;
+  position: sticky;
+  z-index: 1;
+}
+
+.container {
+  text-align: center;
+}
+
+.input-box {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-box input {
+  width: 30rem;
+  height: 1rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+#outerPlayerDiv {
+  margin: 1rem;
+}
+
+#resultsDiv {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.6s ease, max-height 0.6s ease;
+}
+
+#resultsDiv.show {
+  opacity: 1;
+  max-height: 1000px;
+  transition-delay: 0.5s;
+}
+
+.submit-button {
+  background: linear-gradient(135deg, #1a1a1a, #404040);
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 1.6rem;
+  cursor: pointer;
+  margin: 1rem;
+}
+
+.submit-button:hover {
+  background: linear-gradient(135deg, #404040, #1a1a1a);
+}
+
+.disabled {
+  background-color: #4a4a4a;
+  pointer-events: none;
+  color: #ffffff;
+  cursor: not-allowed;
+}
+
+.disabled:hover {
+  cursor: not-allowed;
+}
+
+@media screen and (max-width: 500px) {
+  body {
+    font-size: 18px;
+    height: 100vh;
+  }
+
+  h1 {
+    font-size: 4rem;
+  }
+
+  .input-box input {
+    width: 90%;
+    height: 4rem;
+    padding: 1rem;
+    font-size: 2rem;
+  }
+
+  .submit-button {
+    padding: 1.8rem 3.6rem;
+    font-size: 2.2rem;
+  }
+}

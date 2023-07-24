@@ -4,8 +4,6 @@ import yt_dlp
 from fastapi import HTTPException
 from datetime import datetime
 
-DOWNLOAD_PATH = os.getenv('DOWNLOAD_PATH', '/home')
-
 def download_youtube_video_as_mp3(url: str, start: str):
     timestamp = datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
     ydl_opts = {
@@ -19,12 +17,12 @@ def download_youtube_video_as_mp3(url: str, start: str):
             '-ss', start,
         ],
         'prefer_ffmpeg': True,
-        'outtmpl': f'{DOWNLOAD_PATH}/{timestamp}.%(ext)s',  # Output path for downloaded MP3
+        'outtmpl': f'{os.getenv("DOWNLOAD_PATH", "/app/ytdownload")}/{timestamp}.%(ext)s',  # Output path for downloaded MP3
     }
 
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             _ = ydl.extract_info(url, download=True)
-        return f'{DOWNLOAD_PATH}/{timestamp}.mp3'
+        return f'{os.getenv("DOWNLOAD_PATH", "/app/ytdownload")}/{timestamp}.mp3'
     except yt_dlp.DownloadError:
         raise HTTPException(status_code=400, detail="Invalid YouTube link")
