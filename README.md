@@ -17,3 +17,21 @@ ShazamYT is a web application that allows you to identify songs from YouTube vid
 
 ## License
 This project is licensed under the MIT License.
+
+# Instructions
+
+```
+git clone https://github.com/dimizisis/shazamyt.git
+```
+
+```
+cd shazamyt/
+```
+
+```
+pip install -r back/requirements.txt
+```
+
+```
+sudo apt install ffmpeg
+```
