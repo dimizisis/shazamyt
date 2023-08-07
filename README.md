@@ -29,9 +29,9 @@ cd shazamyt/
 ```
 
 ```
-pip install -r back/requirements.txt
+docker-compose build --no-cache
 ```
 
 ```
-sudo apt install ffmpeg
+docker-compose up
 ```
