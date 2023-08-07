@@ -1,21 +1,21 @@
-# Use the official Python image as the base image
-FROM python:3.9-slim
+# Use the official Python base image
+FROM python:3.11
+
+RUN apt update && \
+    apt install -y \
+	ffmpeg
 
 # Set the working directory inside the container
 WORKDIR /app
 
-# Copy the backend files to the container's working directory
-COPY requirements.txt .
-COPY main.py .
+# Copy the necessary files to the container (requirements.txt and the 'back' directory)
+COPY . /app
 
-# Create a directory called 'ytdownload' inside the 'app' directory
-RUN mkdir ytdownload
+# Install the Python dependencies
+RUN pip3 install --no-cache-dir -r requirements.txt
 
-# Install backend dependencies
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Expose the port on which your FastAPI app is running
+# Expose the port that your FastAPI application will run on (default is 8000)
 EXPOSE 8000
 
-# Start the FastAPI app using Uvicorn
+# Command to run your FastAPI application using uvicorn
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

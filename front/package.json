@@ -2,7 +2,7 @@
     "name": "shazamyt",
     "version": "1.0.0",
     "scripts": {
-        "start": "node script.js"
+        "start": "node src/script.js"
     },
     "dependencies": {
         "plyr": "^3.7.8"

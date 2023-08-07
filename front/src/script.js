@@ -1,22 +1,21 @@
-import Plyr from 'plyr';
-
 // Initialize the Plyr player
 const player = new Plyr('#player');
 
-const findButton = document.getElementById('findButton') as HTMLButtonElement;
+const findButton = document.getElementById('findButton');
 
 const SERVER = 'localhost';
 const PORT = '8000';
 
 findButton.addEventListener('click', () => {
-  const url = (document.getElementById('linkInput') as HTMLInputElement).value;
+  const url = document.getElementById('linkInput').value;
   const id = extractVideoId(url);
-  const start = extractStartTimeInSecondsFromYouTubeURL(url);
+  const start = extractStartTimeInSecondsFromYouTubeURL(url)
 
-  const outerPlayerDiv = document.getElementById('outerPlayerDiv') as HTMLDivElement;
-  const resultsDiv = document.getElementById('resultsDiv') as HTMLDivElement;
+  const outerPlayerDiv = document.getElementById('outerPlayerDiv');
+  const resultsDiv = document.getElementById('resultsDiv');
 
-  if (id === null) return;
+  if (id === null)
+    return;
 
   outerPlayerDiv.style.display = 'inherit';
   outerPlayerDiv.style.visibility = 'visible';
@@ -33,28 +32,31 @@ findButton.addEventListener('click', () => {
     ],
   };
 
-  player.on('ready', function (event: Event) {
+  player.on('ready', function (event) {
     if (start !== -1) {
       player.forward(start);
     }
   });
+
 });
 
-const goButton = document.getElementById('goButton') as HTMLButtonElement;
+const goButton = document.getElementById('goButton');
 
-const loadingSpinnerDiv = document.getElementById('loadingSpinnerDiv') as HTMLDivElement;
+const loadingSpinnerDiv = document.getElementById('loadingSpinnerDiv');
 
 goButton.addEventListener('click', () => {
-  const startTime = parseInt(player.currentTime.toString());
+
+  const startTime = parseInt(player.currentTime);
   goButton.disabled = true;
   findButton.disabled = true;
   goButton.classList.add('disabled');
   findButton.classList.add('disabled');
   loadingSpinnerDiv.style.display = 'inherit';
-  searchForSong((document.getElementById('linkInput') as HTMLInputElement).value, secondsToHMS(startTime));
+  searchForSong(document.getElementById('linkInput').value, secondsToHMS(startTime))
+
 });
 
-function extractVideoId(url: string): string | null {
+function extractVideoId(url) {
   const regex = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:watch\?.*v=|embed\/|v\/)|youtu\.be\/)([\w-]{11})(?:\S+)?$/;
   const match = url.match(regex);
 
@@ -65,7 +67,7 @@ function extractVideoId(url: string): string | null {
   return null;
 }
 
-function extractStartTimeInSecondsFromYouTubeURL(url: string): number {
+function extractStartTimeInSecondsFromYouTubeURL(url) {
   const searchParams = new URLSearchParams(new URL(url).search);
   const startTimeParam = searchParams.get('t');
 
@@ -77,7 +79,7 @@ function extractStartTimeInSecondsFromYouTubeURL(url: string): number {
   return -1;
 }
 
-function secondsToHMS(seconds: number): string {
+function secondsToHMS(seconds) {
   const hours = Math.floor(seconds / 3600);
   const minutes = Math.floor((seconds % 3600) / 60);
   const remainingSeconds = seconds % 60;
@@ -85,22 +87,24 @@ function secondsToHMS(seconds: number): string {
   return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
 }
 
-function searchForSong(youtubeUrl: string, startTime: string): void {
+function searchForSong(youtubeUrl, startTime) {
+
   const apiUrl = `http://${SERVER}:${PORT}/youtube?url=${encodeURIComponent(youtubeUrl)}&start=${encodeURIComponent(startTime)}`;
 
   fetch(apiUrl)
     .then(response => response.json())
     .then(data => {
-      const albumImage = document.getElementById('albumImage') as HTMLImageElement;
-      const songName = document.getElementById('songName') as HTMLParagraphElement;
-      const artist = document.getElementById('artist') as HTMLParagraphElement;
-      const outerPlayerDiv = document.getElementById('outerPlayerDiv') as HTMLDivElement;
-      const resultsDiv = document.getElementById('resultsDiv') as HTMLDivElement;
 
-      hideAllSearchComponents(outerPlayerDiv, loadingSpinnerDiv);
+      const albumImage = document.getElementById('albumImage');
+      const songName = document.getElementById('songName');
+      const artist = document.getElementById('artist');
+      const outerPlayerDiv = document.getElementById('outerPlayerDiv');
+      const resultsDiv = document.getElementById('resultsDiv');
+
+      hideAllSearchComponents(outerPlayerDiv, loadingSpinnerDiv)
 
       if (!data.track) {
-        albumImage.src = 'https://www.shazam.com/resources/f6f457227917dcdfc9538fbbb5a931f111648b3d/nocoverart.jpg';
+        albumImage.src = 'https://www.shazam.com/resources/f6f457227917dcdfc9538fbbb5a931f111648b3d/nocoverart.jpg'
         albumImage.classList.add('visible');
         songName.innerHTML = 'Couldn\'nt recognize the song :(';
         goButton.disabled = false;
@@ -111,28 +115,29 @@ function searchForSong(youtubeUrl: string, startTime: string): void {
         return;
       }
 
-      showSongDetails(resultsDiv, albumImage, songName, artist, data);
+      showSongDetails(resultsDiv, albumImage, songName, artist, data)
 
       goButton.disabled = false;
       findButton.disabled = false;
       goButton.classList.remove('disabled');
       findButton.classList.remove('disabled');
+
     })
     .catch(error => console.error('Error:', error));
 }
 
-function hideAllSearchComponents(outerPlayerDiv: HTMLDivElement, loadingSpinnerDiv: HTMLDivElement): void {
+function hideAllSearchComponents(outerPlayerDiv, loadingSpinnerDiv) {
   outerPlayerDiv.style.display = 'none';
   loadingSpinnerDiv.style.display = 'none';
 }
 
-function showSongDetails(resultsDiv: HTMLDivElement, albumImage: HTMLImageElement, songName: HTMLParagraphElement, artist: HTMLParagraphElement, data: any): void {
+function showSongDetails(resultsDiv, albumImage, songName, artist, data) {
   songName.innerHTML = data.track.title;
   artist.innerHTML = data.track.subtitle;
   if (data.track.images && data.track.images.coverart) {
     albumImage.src = data.track.images.coverart;
   } else {
-    albumImage.src = 'https://www.shazam.com/resources/f6f457227917dcdfc9538fbbb5a931f111648b3d/nocoverart.jpg';
+    albumImage.src = 'https://www.shazam.com/resources/f6f457227917dcdfc9538fbbb5a931f111648b3d/nocoverart.jpg'
   }
   resultsDiv.classList.add('show');
   albumImage.classList.add('visible');
