@@ -1,5 +1,7 @@
 # ShazamYT
 
+![Alt text](https://i.imgur.com/AW7iFhn.png)
+
 ShazamYT is a web application that allows you to identify songs from YouTube videos by simply pasting the video link. You can also provide a specific timestamp to start the identification process from that point in the video.
 
 ## Features
