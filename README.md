@@ -13,9 +13,9 @@ ShazamYT is a web application that allows you to identify songs from YouTube vid
 ## Technologies Used
 * HTML
 * CSS
-* TypeScript
+* Vanilla Javascript
 * Plyr (for YouTube video playback)
-* Shazam API (for song identification)
+* Shazamio Library (https://pypi.org/project/shazamio/)
 
 ## License
 This project is licensed under the MIT License.
