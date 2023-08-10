@@ -1,5 +1,7 @@
 # ShazamYT
 
+![Alt text](https://i.imgur.com/AW7iFhn.png)
+
 ShazamYT is a web application that allows you to identify songs from YouTube videos by simply pasting the video link. You can also provide a specific timestamp to start the identification process from that point in the video.
 
 ## Features
@@ -11,9 +13,9 @@ ShazamYT is a web application that allows you to identify songs from YouTube vid
 ## Technologies Used
 * HTML
 * CSS
-* TypeScript
+* Vanilla Javascript
 * Plyr (for YouTube video playback)
-* Shazam API (for song identification)
+* Shazamio Library (https://pypi.org/project/shazamio/)
 
 ## License
 This project is licensed under the MIT License.
@@ -29,9 +31,9 @@ cd shazamyt/
 ```
 
 ```
-pip install -r back/requirements.txt
+docker-compose build --no-cache
 ```
 
 ```
-sudo apt install ffmpeg
+docker-compose up
 ```
