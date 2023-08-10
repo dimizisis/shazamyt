@@ -52,7 +52,9 @@ goButton.addEventListener('click', () => {
   goButton.classList.add('disabled');
   findButton.classList.add('disabled');
   loadingSpinnerDiv.style.display = 'inherit';
-  searchForSong(document.getElementById('linkInput').value, secondsToHMS(startTime))
+
+  const urlWithoutList = document.getElementById('linkInput').value.replace(/(\?|&)list=[^&]+/, '');
+  searchForSong(urlWithoutList, secondsToHMS(startTime))
 
 });
 
